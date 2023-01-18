@@ -48,9 +48,23 @@ def main():
                 input("Doors: ")
             ))
         elif choice == NEW_TRUCK_CHOICE:
-            print('Add a new truck')
+            print('\nInput truck data:')
+            vehicles_list.append(vehicles.Truck(
+                input("Make: "),
+                input("Year: "),
+                input("Milage: "),
+                input("Price: "),
+                input("Drivetype: ")
+            ))
         elif choice == NEW_SUV_CHOICE:
-            print('Add a new SUV')
+            print('\nInput SUV data:')
+            vehicles_list.append(vehicles.SUV(
+                input("Make: "),
+                input("Year: "),
+                input("Milage: "),
+                input("Price: "),
+                input("Number of passengers: ")
+            ))
         elif choice == FIND_VEHICLE_CHOICE:
             print('Find vehicle by name')
         elif choice == SHOW_VEHICLES_CHOICE:
