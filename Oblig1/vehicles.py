@@ -1,12 +1,12 @@
 class Vehicle:
     def __init__(self, make, model, milage, price) -> None:
-        self._make = make
-        self._model = model
-        self._milage = milage
-        self._price = price
+        self.__make = make
+        self.__model = model
+        self.__milage = milage
+        self.__price = price
 
     def __str__(self) -> str:
-        return f"Make:  {self._make}  Model:  {self._model}  Milage:  {self._milage}  Price:  {self._price}"
+        return f"Make:  {self.__make}  Model:  {self.__model}  Milage:  {self.__milage}  Price:  {self.__price}"
 
     def get_make(self): return self.__make
 

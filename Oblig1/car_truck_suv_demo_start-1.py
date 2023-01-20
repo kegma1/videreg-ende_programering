@@ -66,7 +66,15 @@ def main():
                 input("Number of passengers: ")
             ))
         elif choice == FIND_VEHICLE_CHOICE:
-            print('Find vehicle by name')
+            make = input("\nEnter the name of your vehicle: ")
+            found_one = False
+            for vehicle in vehicles_list:
+                if vehicle.get_make() == make:
+                    found_one = True
+                    print(vehicle)
+            if not found_one:
+                print("Could not find your vehicle.")
+                
         elif choice == SHOW_VEHICLES_CHOICE:
             #show all vehicles
             print('The following cars are in inventory:')
