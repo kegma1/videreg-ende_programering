@@ -1,6 +1,8 @@
 # This program creates a Car object, a Truck object,
 # and an SUV object.
 import vehicles
+import os
+import pickle
 
 # Constants for the menu choices
 NEW_CAR_CHOICE = 1
@@ -10,24 +12,18 @@ FIND_VEHICLE_CHOICE = 4
 SHOW_VEHICLES_CHOICE = 5
 QUIT_CHOICE = 6
 
+DATA = "vehicles.dat"
+
 def main():
     # Create empty list for vehicles
     vehicles_list = []
-    # Create a Car object for a used 2001 BMW
-    # with 70,000 miles, priced at $15,000, with
-    # 4 doors.
-    car = vehicles.Car('BMW 320', 2001, 70000, 15000.0, 4)
-    vehicles_list.append(car)
-    # Create a Truck object for a used 2002
-    # Toyota pickup with 40,000 miles, priced
-    # at $12,000, with 4-wheel drive.
-    truck = vehicles.Truck('Toyota RAV4', 2002, 40000, 12000.0, '4WD')
-    vehicles_list.append(truck)
-    # Create an SUV object for a used 2000
-    # Volvo with 30,000 miles, priced
-    # at $18,500, with 5 passenger capacity.
-    suv = vehicles.SUV('Volvo XC60', 2010, 30000, 18500.0, 5)
-    vehicles_list.append(suv)
+
+    if os.path.isfile(DATA):
+        with open(DATA, "rb") as f:
+            try:
+                vehicles_list = pickle.load(f)
+            except:
+                pass
 
     choice = 0
     while choice != QUIT_CHOICE:
@@ -35,8 +31,11 @@ def main():
         display_menu()
 
         # Get the user's choice.
-        choice = int(input('Enter your choice: '))
-
+        try:
+            choice = int(input('Enter your choice: '))
+        except:
+            print('Error: invalid selection.') 
+            continue
         # Perform the selected action.
         if choice == NEW_CAR_CHOICE:
             print('\nInput car data:')
@@ -69,7 +68,7 @@ def main():
             make = input("\nEnter the name of your vehicle: ")
             found_one = False
             for vehicle in vehicles_list:
-                if vehicle.get_make() == make:
+                if make in vehicle.get_make():
                     found_one = True
                     print(vehicle)
             if not found_one:
@@ -78,9 +77,16 @@ def main():
         elif choice == SHOW_VEHICLES_CHOICE:
             #show all vehicles
             print('The following cars are in inventory:')
+            if len(vehicles_list) == 0:
+                print("No vehicles found")
+
             for item in vehicles_list:
                 print(item)
         elif choice == QUIT_CHOICE:
+            with open(DATA, "wb") as f:
+                vehicles_list.sort(key=lambda x: x.get_make())
+                pickle.dump(vehicles_list, f)
+
             print('Exiting the program...')    
         else:
             print('Error: invalid selection.')    

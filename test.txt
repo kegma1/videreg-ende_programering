@@ -1,4 +1,9 @@
-mordi
-boob
-boob
-mordi boob fardin
+funk foo x: Int, : Str -> Char {
+    1 x +
+    hvis dup 2 = {
+        + return
+    } else {
+        'c' return
+    }
+}
+
