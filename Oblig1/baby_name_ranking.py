@@ -6,7 +6,7 @@ def main():
         print("Only 2001-2010 is supported")
         return
     gender = input("Enter the gender: ").upper()
-    if gender != "F" and gender != "M":
+    if not (gender == "F" or gender == "M"):
         print("Your gender in invalid, only 'F' or 'M'")
         return
     name = input("Enter the name: ")
@@ -25,9 +25,9 @@ def find_rank(data, name, gender):
     for row in data:
         cols = row.decode().split("\t")
 
-        if gender == "M" and cols[1] == name:
+        if gender == "M" and cols[1].strip() == name:
             return cols[0]
-        elif gender == "F" and cols[3] == name:
+        elif gender == "F" and cols[3].strip() == name:
             return cols[0]
 
     return None
