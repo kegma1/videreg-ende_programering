@@ -1,5 +1,8 @@
 {
     "cSpell.words": [
         "Drivetype"
+    ],
+    "python.analysis.extraPaths": [
+        "./Oblig3"
     ]
 }
