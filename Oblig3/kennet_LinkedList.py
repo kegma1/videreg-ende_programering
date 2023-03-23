@@ -143,35 +143,75 @@ class LinkedList:
 
     # Return true if this list contains the element o 
     def contains(self, e):
-        print("Implementation left as an exercise")
-        return True
+        current_node = self.__head
+        for _ in range(self.__size):
+            if current_node.element == e:
+                return True
+            else:
+                current_node = current_node.next
+        return False
 
     # Remove the element and return true if the element is in the list 
     def remove(self, e):
-        print("Implementation left as an exercise")
-        return True
+        current_node = self.__head
+        previous_node = None
+        for _ in range(self.__size):
+            if current_node.element == e:
+                if previous_node == None:
+                    self.__head = current_node.next
+                else:
+                    if current_node.next == None:
+                        self.__tail = previous_node
+                    previous_node.next = current_node.next
+                self.__size -= 1
+                return True
+            else:
+                previous_node = current_node
+                current_node = current_node.next
+        return False
 
     # Return the element from this list at the specified index 
     def get(self, index):
-        print("Implementation left as an exercise")
+        if not index >= self.__size:
+            current_node = self.__head
+            for _ in range(index):
+                    current_node = current_node.next
+            return current_node.element
         return None
 
     # Return the index of the head matching element in this list.
     # Return -1 if no match.
     def indexOf(self, e):
-        print("Implementation left as an exercise")
-        return 0
+        current_node = self.__head
+        for i in range(self.__size):
+            if current_node.element == e:
+                return i
+            else:
+                current_node = current_node.next
+        return -1
 
     # Return the index of the last matching element in this list
     #  Return -1 if no match. 
     def lastIndexOf(self, e):
-        print("Implementation left as an exercise")
-        return 0
+        index_of_e = -1
+        current_node = self.__head
+        for i in range(self.__size):
+            if current_node.element == e:
+                index_of_e = i
+                current_node = current_node.next
+            else:
+                current_node = current_node.next
+        return index_of_e
 
     # Replace the element at the specified position in this list
     #  with the specified element. */
     def set(self, index, e):
-        print("Implementation left as an exercise")
+        if not index >= self.__size:
+            current_node = self.__head
+            for _ in range(index):
+                    current_node = current_node.next
+            current_node.element = e
+            return current_node.element
         return None
     
     # Return elements via indexer
@@ -187,6 +227,9 @@ class Node:
     def __init__(self, e):
         self.element = e
         self.next = None
+    
+    def __str__(self):
+        return str(self.element) 
 
 class LinkedListIterator: 
     def __init__(self, head):
