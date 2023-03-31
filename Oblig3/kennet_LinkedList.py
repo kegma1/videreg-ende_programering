@@ -175,7 +175,7 @@ class LinkedList:
         if not index >= self.__size:
             current_node = self.__head
             for _ in range(index):
-                    current_node = current_node.next
+                current_node = current_node.next
             return current_node.element
         return None
 
@@ -209,7 +209,7 @@ class LinkedList:
         if not index >= self.__size:
             current_node = self.__head
             for _ in range(index):
-                    current_node = current_node.next
+                current_node = current_node.next
             current_node.element = e
             return current_node.element
         return None
@@ -242,4 +242,25 @@ class LinkedListIterator:
             element = self.current.element
             self.current = self.current.next
             return element    
-        
+
+def main():
+    list = LinkedList()
+    list.add(1)
+    list.add(2)
+    list.add(3)
+    list.add(4)
+    list.add(5)
+    list.add(4)
+    list.add(6)
+
+    print("list is", list)
+    print("does list contain 2?", list.contains(2))
+    print("does list contain 'hallo'?", list.contains("hallo"))
+    print("what is the 5th element of the list?", list[5])
+    print("index of first 4?", list.indexOf(4))
+    print("index of last 4?", list.lastIndexOf(4))
+    print("set 5th element to 'hallo'", list.set(5, "hallo"))
+    print("how does the list look like now?", list)
+    print("remove 'hallo'", list.remove("hallo"))
+    print("how does the list look like now?", list)
+main()
