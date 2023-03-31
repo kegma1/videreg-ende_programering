@@ -259,7 +259,7 @@ class BSTIterator:
 def main():
     tree = MyBST()
 
-    s = "50 40 60 30 70 20 80 10 90 5" #input("Enter integers in one line for tree separated by space: ");
+    s = input("Enter integers in one line for tree separated by space: ");
     list1 =  [int(x) for x in s.split()]
     for e in list1:
         print(f"{e} are inserted into tree")
