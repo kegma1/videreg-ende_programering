@@ -25,33 +25,46 @@ class WeightedGraph:
 
     
     def get_shortest_path(self, s):
-        tree = ShortestPathTree(s)
-        tree.add_node(s, 0, None)
-        cost = {s:0}
+        T = set()
+        cost = {}
+        parent = {}
         
         for u in self.graph.keys():
-            if u not in cost:
-                cost[u] = float('inf')
+            cost[u] = float('inf')
+
+        cost[s] = 0
+        parent[s] = None
+        T.add(s)
         
-        return tree
+        while len(T) < len(self.graph):
+            min_cost = float('inf')
+            for u in T:
+                for v in self.graph[u]:
+                    if v not in T:
+                        if cost[u] + self.graph[u][v] < min_cost:
+                            min_cost = cost[u] + self.graph[u][v]
+                            parent[v] = u
+                            curr_node = v
+            T.add(curr_node)
+            cost[curr_node] = min_cost
+
+
+        return ShortestPathTree(s, cost, parent)
 
 class ShortestPathTree:
-    def __init__(self, root):
+    def __init__(self, root, cost, parent):
         self.root = root
-        self.cost = {} # set containing the cost to each node
-        self.parents = {} # set of the direct parent of each node, the root get the value 'None'
+        self.cost = cost # set containing the cost to each node
+        self.parents = parent # set of the direct parent of each node, the root get the value 'None'
 
-    def add_node(self, node, cost, parent):
-        if node not in self.cost and node not in self.parents:
-            self.cost[node] = cost
-            self.parents[node] = parent
-
+    def __str__(self) -> str:
+        return f"root: {self.root}\nparent: {self.parents}\ncost: {self.cost}"
 
 def main():
     path = input("Enter a path to a graph: ")
     g = WeightedGraph()
     g.parse_graph_file(path)
     tree = g.get_shortest_path(1)
-    print(tree.parents, tree.cost)
+    print(tree)
 main()
 
