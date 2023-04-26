@@ -3,6 +3,7 @@
         "Drivetype"
     ],
     "python.analysis.extraPaths": [
-        "./Oblig3"
+        "./Oblig3",
+        "./oblig 4"
     ]
 }
