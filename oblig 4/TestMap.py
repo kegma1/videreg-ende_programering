@@ -8,7 +8,7 @@ def main():
     map.put("Lewis", 29)
     map.put("Cook", 29)
     map.put("Cook", 129)
-    
+
     print("Entry set in map: " + str(map.items()))
     print("The age for Lewis is " + str(map.get("Lewis")))
     print("Is Smith in the map? " + str(map.containsKey("Smith")))
@@ -17,7 +17,7 @@ def main():
     print("Is value 30 in the map? " + str(map.containsValue(30)))
     print("Is value 33 in the map? " + str(map.containsValue(33)))
     print("Is age 33 in the map? " + str(map.containsValue(33)))
-    print("All values for Cook? " + str(map.getAll("Cook")))
+    print("All values for Cook? " + str(map.getAll("Cook"))) # vet ikke om det er meningen at flere (key, value) par skal kunne eksistere. jeg har valgt å si at det ikke er lov, så denne funksjonen gir ikke mening
     print("keys are " + str(map.keys()))
     print("values are " + str(map.values()))
 
