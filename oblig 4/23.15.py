@@ -31,6 +31,8 @@ class MinimumSpanningTree:
     def __init__(self, G):
         self.tree = {}
         self.cost = 0
+        self.root = next(iter(G.graph))
+
         sets = [set([v]) for v in G.graph.keys()]
 
         edges = sorted(G.get_edges(), key=lambda x: x[2])
@@ -58,14 +60,19 @@ class MinimumSpanningTree:
                 sets.remove(set_of_b)
                 sets.append(set_of_a | set_of_b)
 
+
     def getTotalWeight(self):
         return self.cost
 
     def printTree(self):
-        for a in self.tree:
-            print(a)
-            for b in self.tree[a]:
-                print(f"    {self.tree[a][b]}--> {b}")
+        print(self.tree)
+        print(f"Root is: {self.root}")
+        edges = []
+        for k, v in self.tree.items():
+            for dest, _ in v.items():
+                edges.append((k, dest))
+
+        print("Edges:", " ".join(str(e) for e in edges))
 
 class ShortestPathTree:
     def __init__(self, G, root):
@@ -94,19 +101,19 @@ class ShortestPathTree:
             self.cost[curr_node] = min_cost
 
     def printAllPaths(self):
+        print(f"All shortest paths from {self.root} are:")
         for a in self.parents:
             if a is not None:
-                path = [a]
+                print(f"A path from {self.root} to {a}: ", end="")
+                
+                path = []
                 while a is not None:
-                    a = self.parents[a]
                     path.append(a)
-                path_string = ""
-                for x in path:
-                    if x is not None:
-                        path_string += f"{x} -> "
-                    else:
-                        path_string += f"cost({self.cost[path[0]]})"
-                print(path_string)
+                    a = self.parents[a]
+                path.reverse()
+                print(" ".join(path), end=" ")
+                print(f"(cost: {self.cost[path[-1]]})")
+
                 
 
 
